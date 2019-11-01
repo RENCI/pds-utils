@@ -1,23 +1,25 @@
 #!/bin/bash
+if ! [ -z $IMAGE ] && ! [ -z $VERSION ] ; then
+    docker build . -t $IMAGE:$VERSION
+    docker tag $IMAGE:0.1.0 zooh/$IMAGE:$VERSION
+    docker push zooh/$IMAGE:0.1.0
+fi
+
 if [ -z $COMMIT_MSG ]; then
     COMMIT_MSG=update
 fi
-if [ -z $IMAGE ]; then
-    echo environment variable IMAGE not set
-    exit 1
-fi
-if [ -z $VERSION ]; then
-    echo environment variable VERSION not set
-    exit 1
-fi
-docker build . -t $IMAGE:$VERSION
-docker tag $IMAGE:0.1.0 zooh/$IMAGE:$VERSION
-docker push zooh/$IMAGE:0.1.0
+
 git add -u
 git commit -m $COMMIT_MSG
-git tag v$VERSION -f
 for o in $(git remote)
 do
     git push $o
-    git push $o --tags -f
 done
+
+if ! [ -z $VERSION ] ; then
+    git tag v$VERSION -f
+    for o in $(git remote)
+    do
+	git push $o --tags -f
+    done
+fi

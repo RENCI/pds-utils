@@ -17,9 +17,10 @@ do
 done
 
 if ! [ -z $VERSION ] ; then
-    git tag v$VERSION -f
+    TAG=v$VERSION
+    git tag $TAG -f
     for o in $(git remote)
     do
-	git push $o --tags -f
+	git push $o refs/tags/$TAG -f
     done
 fi

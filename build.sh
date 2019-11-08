@@ -1,8 +1,8 @@
 #!/bin/bash
 if ! [ -z $IMAGE ] && ! [ -z $VERSION ] ; then
     docker build . -t $IMAGE:$VERSION
-    docker tag $IMAGE:0.1.0 zooh/$IMAGE:$VERSION
-    docker push zooh/$IMAGE:0.1.0
+    docker tag $IMAGE:$VERSION zooh/$IMAGE:$VERSION
+    docker push zooh/$IMAGE:$VERSION
 fi
 
 if [ -z $COMMIT_MSG ]; then

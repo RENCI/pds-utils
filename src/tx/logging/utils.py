@@ -1,5 +1,13 @@
+import time
 import requests
 from tx.dateutils.utils import tstostr
+
+
+post_headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+}
+
 
 def to_json(data):
     if data is None:
@@ -14,8 +22,8 @@ def to_json(data):
         return str(data)
 
 
-def log(level, event, source,*args, **kwargs):
-    requests.post(f"{pds_url_base}/{pds_logging}", headers=post_headers, json={
+def tx_log(url, level, event, source, *args, **kwargs):
+    requests.post(url, headers=post_headers, json={
         "event": event,
         "level": str(level),
         "timestamp": timestamp(),

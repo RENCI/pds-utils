@@ -1,4 +1,4 @@
-from oslash import Left, Right
+from tx.functional.either import Left, Right
 from pint import UnitRegistry
 ureg = UnitRegistry()
 

@@ -1,4 +1,4 @@
-from oslash import Left, Right    
+from tx.functional.either import Left, Right    
 
 def isBundle(bundle):
     return isinstance(bundle, dict) and "resourceType" in bundle and bundle["resourceType"] == "Bundle"

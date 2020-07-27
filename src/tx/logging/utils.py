@@ -1,6 +1,19 @@
 import time
 import requests
 from tx.dateutils.utils import tstostr
+import os
+import logging
+
+def getLogger(name, level):
+    logger = logging.getLogger(name)
+    ll = os.environ.get("LOG_LEVEL", level)
+    logger.setLevel(ll)
+    ch = logging.StreamHandler()
+    ch.setLevel(ll)
+    formatter = logging.Formatter('%(asctime)s:%(name)s:%(levelname)s:%(message)s')
+    ch.setFormatter(formatter)
+    logger.addHandler(ch)
+    return logger
 
 
 post_headers = {

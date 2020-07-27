@@ -23,7 +23,11 @@ def bundle(records, type = "searchset"):
 
 def unbundle(bundle):
     if isBundle(bundle):
-        return Right(list(map(lambda a : a[type_name(bundle["type"])], bundle.get("entry", []))))
+        type = bundle.get("type")
+        if type is None:
+            return Left(str(bundle) + " doesn't have type")
+        else:
+            return Right(list(map(lambda a : a[type_name(type)], bundle.get("entry", []))))
     else:
         return Left(str(bundle) + " is not a bundle")
 

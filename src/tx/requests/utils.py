@@ -1,5 +1,5 @@
 from jsonschema import validate
-from oslash import Left, Right
+from tx.functional.either import Left, Right
 import requests
 
 
